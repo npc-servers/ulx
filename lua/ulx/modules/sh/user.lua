@@ -35,6 +35,7 @@ local function updateNames()
 	end
 end
 hook.Add( ULib.HOOK_UCLCHANGED, "ULXGroupNamesUpdate", updateNames )
+hook.Add( ULib.HOOK_UCL_GROUP_CHANGED, "ULXGroupNamesUpdate", updateNames )
 updateNames() -- Init
 
 function ulx.usermanagementhelp( calling_ply )

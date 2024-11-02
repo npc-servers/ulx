@@ -519,5 +519,6 @@ function xbans.UCLChanged()
 	xbans.btnFreezeBan:SetDisabled( not LocalPlayer():query("ulx freeze") )
 end
 hook.Add( "UCLChanged", "xgui_RefreshBansMenu", xbans.UCLChanged )
+hook.Add( ULib.HOOK_UCL_AUTHED_CHANGED, "xgui_RefreshBansMenu", xbans.UCLChanged )
 
 xgui.addModule( "Bans", xbans, "icon16/exclamation.png", "xgui_managebans" )
