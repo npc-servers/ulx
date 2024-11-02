@@ -1277,6 +1277,7 @@ function groups.UCLChanged()
 end
 
 hook.Add( "UCLChanged", "xgui_RefreshGroups", groups.UCLChanged )
+hook.Add( ULib.HOOK_UCL_GROUP_CHANGED, "xgui_RefreshGroups", groups.updateGroups )
 hook.Add( "ULibPlayerNameChanged", "xgui_plyUpdateGroups", groups.playerNameChanged )
 xgui.hookEvent( "users", "clear",  groups.clearPlayerList, "groupsPlayerClear" )
 xgui.hookEvent( "users", "process", groups.playerListAddChunk, "groupsPlayerChunk" )
