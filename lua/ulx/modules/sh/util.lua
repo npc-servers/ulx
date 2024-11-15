@@ -89,6 +89,11 @@ function ulx.ban( calling_ply, target_ply, minutes, reason )
 		return
 	end
 
+	if calling_ply == target_ply then
+		ULib.tsayError( calling_ply, "You cannot ban yourself", true )
+		return
+	end
+
 	local time = "for #s"
 	if minutes == 0 then time = "permanently" end
 	local str = "#A banned #T " .. time
@@ -109,6 +114,11 @@ function ulx.banid( calling_ply, steamid, minutes, reason )
 	steamid = steamid:upper()
 	if not ULib.isValidSteamID( steamid ) then
 		ULib.tsayError( calling_ply, "Invalid steamid." )
+		return
+	end
+
+	if calling_ply:SteamID() == steamid then
+		ULib.tsayError( calling_ply, "You cannot ban yourself", true )
 		return
 	end
 
