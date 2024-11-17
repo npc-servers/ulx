@@ -1,6 +1,9 @@
 -- This module holds any type of chatting functions
 CATEGORY_NAME = "Chat"
 
+local ID_GIMP = 1
+local ID_MUTE = 2
+
 ------------------------------ Psay ------------------------------
 function ulx.psay( calling_ply, target_ply, message )
 	if target_ply.gimp == ID_MUTE then
@@ -154,9 +157,6 @@ end
 ------------------------------ Gimp ------------------------------
 ulx.gimpSays = ulx.gimpSays or {} -- Holds gimp says
 local gimpSays = ulx.gimpSays -- For XGUI, too lazy to change all refs
-local ID_GIMP = 1
-local ID_MUTE = 2
-
 function ulx.addGimpSay( say )
 	table.insert( gimpSays, say )
 end
