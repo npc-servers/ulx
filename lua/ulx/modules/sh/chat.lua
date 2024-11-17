@@ -3,7 +3,7 @@ CATEGORY_NAME = "Chat"
 
 ------------------------------ Psay ------------------------------
 function ulx.psay( calling_ply, target_ply, message )
-	if calling_ply:GetNWBool( "ulx_muted", false ) then
+	if target_ply.gimp == ID_MUTE then
 		ULib.tsayError( calling_ply, "You are muted, and therefore cannot speak! Use asay for admin chat if urgent.", true )
 		return
 	end
@@ -198,7 +198,6 @@ function ulx.mute( calling_ply, target_plys, should_unmute )
 		else
 			v.gimp = ID_MUTE
 		end
-		v:SetNWBool("ulx_muted", not should_unmute)
 	end
 
 	if not should_unmute then
@@ -227,7 +226,6 @@ end
 
 ------------------------------ Gag ------------------------------
 function ulx.gag( calling_ply, target_plys, should_ungag )
-	local players = player.GetAll()
 	for i=1, #target_plys do
 		local v = target_plys[ i ]
 		v.ulx_gagged = not should_ungag
