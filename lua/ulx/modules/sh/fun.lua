@@ -390,7 +390,6 @@ blind:help( "Blinds target(s)." )
 blind:setOpposite( "ulx unblind", {_, _, _, true}, "!unblind" )
 
 ------------------------------ Jail ------------------------------
-local doJail
 local jailableArea
 function ulx.jail( calling_ply, target_plys, seconds, should_unjail )
 	local affected_plys = {}
@@ -403,7 +402,7 @@ function ulx.jail( calling_ply, target_plys, seconds, should_unjail )
 			elseif not jailableArea( v:GetPos() ) then
 				ULib.tsayError( calling_ply, v:Nick() .. " is not in an area where a jail can be placed!", true )
 			else
-				doJail( v, seconds )
+				ulx.doJail( v, seconds )
 
 				table.insert( affected_plys, v )
 			end
@@ -465,7 +464,7 @@ function ulx.jailtp( calling_ply, target_ply, seconds )
 		target_ply:SetPos( pos )
 		target_ply:SetLocalVelocity( Vector( 0, 0, 0 ) ) -- Stop!
 
-		doJail( target_ply, seconds )
+		ulx.doJail( target_ply, seconds )
 	end
 
 	local str = "#A teleported and jailed #T"
@@ -491,9 +490,9 @@ local function jailCheck()
 		if ply.jail and (ply.jail.pos-ply:GetPos()):LengthSqr() >= 6500 then
 			ply:SetPos( ply.jail.pos )
 			if ply.jail.jail_until then
-				doJail( ply, ply.jail.jail_until - CurTime() )
+				ulx.doJail( ply, ply.jail.jail_until - CurTime() )
 			else
-				doJail( ply, 0 )
+				ulx.doJail( ply, 0 )
 			end
 		end
 	end
@@ -525,7 +524,7 @@ local jail = {
 	{ pos = Vector( -52, 0, 46 ), ang = Angle( 0, 0, 0 ), mdl=mdl1 },
 	{ pos = Vector( 52, 0, 46 ), ang = Angle( 0, 0, 0 ), mdl=mdl1 },
 }
-doJail = function( v, seconds )
+ulx.doJail = function( v, seconds )
 	if v.jail then -- They're already jailed
 		v.jail.unjail()
 	end
