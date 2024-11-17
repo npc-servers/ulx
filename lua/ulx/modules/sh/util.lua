@@ -117,7 +117,7 @@ function ulx.banid( calling_ply, steamid, minutes, reason )
 		return
 	end
 
-	if calling_ply:SteamID() == steamid then
+	if IsValid( calling_ply ) and calling_ply:SteamID() == steamid then
 		ULib.tsayError( calling_ply, "You cannot ban yourself", true )
 		return
 	end
