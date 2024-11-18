@@ -86,7 +86,7 @@ cmds.setselected = function( selcat, LineID )
 end
 
 function cmds.refreshPlist( arg )
-	if not arg then arg = ULib.cmds.translatedCmds[cmds.selcmd].args[2] end
+	if not arg and cmds.selcmd then arg = ULib.cmds.translatedCmds[cmds.selcmd].args[2] end
 	if not arg or ( arg.type ~= ULib.cmds.PlayersArg and arg.type ~= ULib.cmds.PlayerArg ) then return end
 
 	local lastplys = {}
@@ -395,4 +395,8 @@ end
 cmds.refresh()
 hook.Add( "UCLChanged", "xgui_RefreshPlayerCmds", cmds.refresh )
 hook.Add( "ULibPlayerNameChanged", "xgui_plyUpdateCmds", cmds.playerNameChanged )
+
+hook.Add( "UCLAuthed", "xgui_RefreshPlayerCmds", function() timer.Simple( 0.2, cmds.refreshPlist ) end )
+hook.Add( "UCLAuthChanged", "xgui_RefreshPlayerCmds", function() cmds.refreshPlist() end )
+
 xgui.addModule( "Cmds", cmds, "icon16/user_gray.png" )
