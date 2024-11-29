@@ -4,21 +4,6 @@ local function doMainCfg( path, noMount )
 	ULib.execStringULib( ULib.stripComments( ULib.fileRead( path, noMount ), ";" ), true )
 end
 
-local function doDownloadCfg( path, noMount )
-	-- Does the module exist for this?
-	if not ulx.addForcedDownload then
-		return
-	end
-
-	local lines = ULib.explode( "\n+", ULib.stripComments( ULib.fileRead( path, noMount ), ";" ) )
-	for _, line in ipairs( lines ) do
-		line = line:Trim()
-		if line:len() > 0 then
-			ulx.addForcedDownload( ULib.stripQuotes( line ) )
-		end
-	end
-end
-
 local function doGimpCfg( path, noMount )
 	-- Does the module exist for this?
 	if not ulx.clearGimpSays then
@@ -113,7 +98,6 @@ end
 local function doCfg()
 	local things_to_execute = { -- Indexed by name, value of function to execute
 		["config.txt"] = doMainCfg,
-		["downloads.txt"] = doDownloadCfg,
 		["gimps.txt"] = doGimpCfg,
 		["adverts.txt"] = doAdvertCfg,
 		["votemaps.txt"] = doVotemapsCfg,
