@@ -89,12 +89,12 @@ end
 if not xgui.settings.moduleOrder then xgui.settings.moduleOrder = { "Cmds", "Groups", "Maps", "Settings", "Bans" } end
 if not xgui.settings.settingOrder then xgui.settings.settingOrder = { "Sandbox", "Server", "Client" } end
 if not xgui.settings.animTime then xgui.settings.animTime = 0.22 else xgui.settings.animTime = tonumber( xgui.settings.animTime ) end
-if not xgui.settings.infoColor then
+if not xgui.settings.bottomBarColor then
 	--Default color
-	xgui.settings.infoColor = Color( 100, 255, 255, 128 )
+	xgui.settings.bottomBarColor = Color( 255, 30, 30, 200 )
 else
 	--Ensure that the color contains numbers, not strings
-	xgui.settings.infoColor = Color(xgui.settings.infoColor.r, xgui.settings.infoColor.g, xgui.settings.infoColor.b, xgui.settings.infoColor.a)
+	xgui.settings.bottomBarColor = Color(xgui.settings.bottomBarColor.r, xgui.settings.bottomBarColor.g, xgui.settings.bottomBarColor.b, xgui.settings.bottomBarColor.a)
 end
 if not xgui.settings.showLoadMsgs then xgui.settings.showLoadMsgs = true else xgui.settings.showLoadMsgs = ULib.toBool( xgui.settings.showLoadMsgs ) end
 if not xgui.settings.skin then xgui.settings.skin = "Default" end
@@ -113,9 +113,9 @@ function xgui.init( ply )
 	xgui.infobar = xlib.makepanel{ x=10, y=399, w=580, h=20, parent=xgui.anchor }
 	xgui.infobar:NoClipping( true )
 	xgui.infobar.Paint = function( self, w, h )
-		draw.RoundedBoxEx( 4, 0, 1, 580, 20, xgui.settings.infoColor, false, false, true, true )
+		draw.RoundedBoxEx( 4, 0, 1, 580, 20, xgui.settings.bottomBarColor, false, false, true, true )
 	end
-	local infoLabel = string.format( "\nULX Admin Mod :: XGUI - Team Ulysses |  ULX %s  |  ULib %s", ULib.pluginVersionStr("ULX"), ULib.pluginVersionStr("ULib") )
+	local infoLabel = string.format( "\nULX Admin Mod :: NPCZ Edition" )
 	xlib.makelabel{ x=5, y=-10, label=infoLabel, parent=xgui.infobar }:NoClipping( true )
 	xgui.thetime = xlib.makelabel{ x=515, y=-10, label="", parent=xgui.infobar }
 	xgui.thetime:NoClipping( true )

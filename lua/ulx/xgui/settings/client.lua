@@ -118,8 +118,8 @@ xlib.makecheckbox{ x=10, y=97, w=150, label="Show Startup Messages", value=xgui.
 end
 xlib.makelabel{ x=10, y=120, label="Infobar color:", parent=xguipnl }
 
-xlib.makecolorpicker{ x=10, y=135, color=xgui.settings.infoColor, addalpha=true, alphamodetwo=true, parent=xguipnl }.OnChangeImmediate = function( self, color )
-	xgui.settings.infoColor = color
+xlib.makecolorpicker{ x=10, y=135, color=xgui.settings.bottomBarColor, addalpha=true, alphamodetwo=true, parent=xguipnl }.OnChangeImmediate = function( self, color )
+	xgui.settings.bottomBarColor = color
 end
 
 ----------------
