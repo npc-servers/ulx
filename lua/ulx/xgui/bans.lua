@@ -207,8 +207,8 @@ function xbans.ShowBanDetailsWindow( bandata )
 	xbans.openWindows[bandata.steamID] = xlib.makeframe{ label="Ban Details", x=wx, y=wy, w=285, h=295, skin=xgui.settings.skin }
 
 	local panel = xbans.openWindows[bandata.steamID]
-	local name = xlib.makelabel{ x=50, y=30, label="Name:", parent=panel }
-	xlib.makelabel{ x=90, y=30, w=190, label=( bandata.name or "<Unknown>" ), parent=panel, tooltip=bandata.name }
+	xlib.makelabel{ x=50, y=30, label="Name:", parent=panel }
+	xlib.makelabel{ x=90, y=30, w=190, label=( bandata.name or "<Unknown>" ), parent=panel, tooltip=tostring( bandata.name or "<Unknown>" ) }
 	xlib.makelabel{ x=36, y=50, label="SteamID:", parent=panel }
 	xlib.makelabel{ x=90, y=50, label=bandata.steamID, parent=panel }
 	xlib.makelabel{ x=33, y=70, label="Ban Date:", parent=panel }
