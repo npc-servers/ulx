@@ -1245,3 +1245,16 @@ xlib.ifNotListenHost = function(value)
 	if not LocalPlayer():IsListenServerHost() then return value end
 	return nil
 end
+
+ULib.cmds.addCommandClient( "xgui reload", function()
+	if not IsValid( xgui.anchor ) then return end
+
+	local isVisible = xgui.anchor:IsVisible()
+
+	xgui.anchor:Remove()
+	xgui.init( me )
+
+	if isVisible then
+		xgui.toggle()
+	end
+end )
