@@ -259,7 +259,6 @@ function bans.init()
 	ULib.addBan = function( steamid, time, reason, name, admin )
 		banfunc( steamid, time, reason, name, admin )
 		bans.processBans()
-		bans.unbanTimer()
 	end
 
 	--Hijack the unBan function to update XGUI's ban info.
@@ -272,26 +271,12 @@ function bans.init()
 		end
 	end
 
-	--Create timers that will automatically perform an unban when a users ban runs out. Polls hourly.
-	function bans.unbanTimer()
-		timer.Create( "xgui_unbanTimer", 3600, 0, bans.unbanTimer )
-		for ID, data in pairs( ULib.bans ) do
-			if tonumber( data.unban ) ~= 0 then
-				if tonumber( data.unban ) - os.time() <= 3600 then
-					timer.Remove( "xgui_unban" .. ID )
-					timer.Create( "xgui_unban" .. ID, tonumber( data.unban ) - os.time(), 1, function() ULib.unban( ID ) end )
-				end
-			end
-		end
-	end
-
 	ulx.addToHelpManually( "Menus", "xgui fban", "<player> - Opens the add ban window, freezes the specified player, and fills out the Name/SteamID automatically. (say: !fban)" )
 	ulx.addToHelpManually( "Menus", "xgui xban", "<player> - Opens the add ban window and fills out Name/SteamID automatically if a player was specified. (say: !xban)" )
 end
 
 function bans.postinit()
 	bans.processBans()
-	bans.unbanTimer()
 end
 
 xgui.addSVModule( "bans", bans.init, bans.postinit )
