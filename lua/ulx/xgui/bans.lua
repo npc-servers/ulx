@@ -359,22 +359,10 @@ function xgui.ShowBanWindow( ply, ID, doFreeze, isUpdate, bandata )
 	end
 	xlib.makebutton{ x=45, y=150, w=75, label=( isUpdate and "Update" or "Ban!" ), parent=xgui_banwindow }.DoClick = function()
 		if isUpdate then
-			local function performUpdate(btime)
-				RunConsoleCommand( "xgui", "updateBan", steamID:GetValue(), btime, reason:GetValue(), name:GetValue() )
-				xgui_banwindow:Remove()
-			end
 			btime = banpanel:GetMinutes()
-			if btime ~= 0 and bandata and btime * 60 + bandata.time < os.time() then
-				Derma_Query( "WARNING! The new ban time you have specified will cause this ban to expire.\nThe minimum time required in order to change the ban length successfully is "
-						.. xgui.ConvertTime( os.time() - bandata.time ) .. ".\nAre you sure you wish to continue?", "XGUI WARNING",
-					"Expire Ban", function()
-						performUpdate(btime)
-						xbans.RemoveBanDetailsWindow( bandata.steamID )
-					end,
-					"Cancel", function() end )
-			else
-				performUpdate(btime)
-			end
+
+			RunConsoleCommand( "xgui", "updateBan", steamID:GetValue(), btime, reason:GetValue(), name:GetValue() )
+			xgui_banwindow:Remove()
 			return
 		end
 
