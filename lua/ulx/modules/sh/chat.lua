@@ -11,6 +11,9 @@ function ulx.psay( calling_ply, target_ply, message )
 		return
 	end
 
+	local canSay = hook.Run( "ULX_PSay", calling_ply, target_ply, message )
+	if canSay == false then return end
+
 	ulx.fancyLog( { target_ply, calling_ply }, "#P to #P: " .. message, calling_ply, target_ply )
 end
 local psay = ulx.command( CATEGORY_NAME, "ulx psay", ulx.psay, "!p", true )
