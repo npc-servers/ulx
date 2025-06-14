@@ -6,7 +6,7 @@ local ID_MUTE = 2
 
 ------------------------------ Psay ------------------------------
 function ulx.psay( calling_ply, target_ply, message )
-	if target_ply.gimp == ID_MUTE then
+	if calling_ply.gimp == ID_MUTE then
 		ULib.tsayError( calling_ply, "You are muted, and therefore cannot speak! Use asay for admin chat if urgent.", true )
 		return
 	end
