@@ -335,7 +335,7 @@ function xgui.load_helpers()
 		local charMap = { "Years", "Weeks", "Days", "Hours" }
 		local divisor = { 60 * 24 * 365, 60 * 24 * 7, 60 * 24, 60 }
 		for i, v in ipairs( charPriority ) do
-			if arg:find( v, 1, true ) then
+			if string.find( arg, v, 1, true ) then
 				if not charMap[ i ] or not divisor [ i ] or not ULib.stringTimeToMinutes( arg ) then return nil, nil end
 				local val = ULib.stringTimeToMinutes( arg ) / divisor[ i ]
 				if val == 0 then return "Permanent", 0 end
